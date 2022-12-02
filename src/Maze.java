@@ -79,28 +79,38 @@ class Robot {
     ArrayStack<String> steps = new ArrayStack<>();
 
     private boolean isVisited(String direction) {
-        int updatedRow = currentRow, updatedCol = currentCol;
+        int checkedRow = currentRow, checkedCol = currentCol;
         switch (direction) {
-            case "UP" -> updatedRow = currentRow + 1;
-            case "DOWN" -> updatedRow = currentRow - 1;
-            case "LEFT" -> updatedCol = currentCol - 1;
-            case "RIGHT" -> updatedCol = currentCol + 1;
+            case "UP" -> checkedRow = currentRow + 1;
+            case "DOWN" -> checkedRow = currentRow - 1;
+            case "LEFT" -> checkedCol = currentCol - 1;
+            case "RIGHT" -> checkedCol = currentCol + 1;
         }
 
-        if (visited[updatedRow][updatedCol] == 1) return true;
-
-        currentRow = updatedRow;
-        currentCol = updatedCol;
-        visited[currentRow][currentCol] = 1;
+        if (visited[checkedRow][checkedCol] == 1) return true;
+        visited[checkedRow][checkedCol] = 1;
         return false;
+    }
+
+    private void updateLocation() {
+        switch (currentDirection) {
+            case "UP" -> currentRow++;
+            case "DOWN" -> currentRow--;
+            case "LEFT" -> currentCol--;
+            case "RIGHT" -> currentCol++;
+        }
     }
 
     private String checkNextStep(Maze maze) {
         String result;
         if (!isVisited(currentDirection)) {
+            System.out.println(currentDirection);
             result = maze.go(currentDirection);
-            if (result.equals("win")) return result;
+            if (result.equals("win")) {
+                return result;
+            }
             if (result.equals("true")) {
+                updateLocation();
                 steps.push(currentDirection);
                 return result;
             }
@@ -109,12 +119,16 @@ class Robot {
         for (String direction : directions) {
             if (!direction.equals(currentDirection)) {
                 if (isVisited(direction)) continue;
+                System.out.println(direction);
                 result = maze.go(direction);
                 if (result.equals("true")) {
-                    steps.push(direction);
                     currentDirection = direction;
+                    updateLocation();
+                    steps.push(direction);
                     return result;
                 }
+
+                if (result.equals("win")) return result;
             }
         }
 
@@ -122,7 +136,15 @@ class Robot {
     }
 
     private void backtrack() {
+        steps.pop();
+        switch (currentDirection) {
+            case "UP" -> currentRow--;
+            case "DOWN" -> currentRow++;
+            case "LEFT" -> currentCol++;
+            case "RIGHT" -> currentCol--;
+        }
 
+        currentDirection = steps.peek();
     }
 
     public void navigate() {
@@ -133,7 +155,7 @@ class Robot {
         while (!result.equals("win")) {
             result = checkNextStep(maze);
             if (result.equals("false")) {
-
+                backtrack();
             }
         }
     }
