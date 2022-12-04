@@ -16,40 +16,42 @@ public class FileScanner {
         }
     }
 
-    public static int[] getMazeSizes(String path) throws IOException {
+    public static int getColSize(String path) throws IOException {
         File file = new File(path);
         int colSize = 0;
-        int rowSize = 0;
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String content;
-        while ((content = br.readLine()) != null) {
-            if (rowSize == 0) rowSize = content.length(); // get row
+        while ((content = br.readLine()) != null)
             colSize++; // get col
-        }
 
-        return new int[] {colSize, rowSize};
+
+        return colSize;
     }
 
-    public static char[][] getMazeFromFile(String path) throws IOException {
+    public static String[] getMazeFromFile(String path) throws IOException {
         File file = new File(path);
         BufferedReader br = new BufferedReader(new FileReader(file));
 
-        // get size for 2d array
-        int[] sizes = getMazeSizes(path);
-        int colSize = sizes[0];
-        int rowSize = sizes[1];
+        int colSize = getColSize(path);
 
-        char[][] maze = new char[colSize][rowSize];
+        String[] maze = new String[colSize];
 
         String content;
         int i = 0;
         while ((content = br.readLine()) != null) {
-            maze[i] = content.toCharArray(); // row
+            maze[i] = content; // row
             i++; // move to next col
         }
 
         return maze;
+    }
+
+    public static void main(String[] args) throws IOException {
+        String[] maze = getMazeFromFile("src/data/maze2.txt");
+        for (String row : maze) {
+            System.out.println(row);
+        }
     }
 }
