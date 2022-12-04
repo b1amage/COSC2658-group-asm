@@ -23,6 +23,7 @@ public class Maze {
         robotCol = 1;
         steps = 0;
         */
+
         /*
         rows = 5;
         cols = 5;
@@ -35,8 +36,9 @@ public class Maze {
         robotRow = 3;
         robotCol = 1;
         steps = 0;
-         */
+        */
 
+        /*
         rows = 7;
         cols = 7;
         map = new String[rows];
@@ -49,6 +51,33 @@ public class Maze {
         map[6] = ".......";
         robotRow = 4;
         robotCol = 1;
+        steps = 0;
+         */
+
+        /*
+        rows = 3;
+        cols = 6;
+        map = new String[rows];
+        map[0] = "......";
+        map[1] = ".   X.";
+        map[2] = "......";
+        robotRow = 1;
+        robotCol = 1;
+        steps = 0;
+         */
+
+        rows = 7;
+        cols = 7;
+        map = new String[rows];
+        map[0] = ".......";
+        map[1] = ".     .";
+        map[2] = "..   ..";
+        map[3] = "..   ..";
+        map[4] = ".X    .";
+        map[5] = ".     .";
+        map[6] = ".......";
+        robotRow = 4;
+        robotCol = 2;
         steps = 0;
     }
 
