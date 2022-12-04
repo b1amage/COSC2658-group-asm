@@ -84,9 +84,7 @@ public class Maze {
          */
 
         try {
-            map = FileScanner.getMazeFromFile("src/data/maze2.txt");
-            System.out.println(map.length);
-            System.out.println(map[0].length());
+            map = FileScanner.getMazeFromFile("src/data/maze3.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,6 +119,8 @@ public class Maze {
             // Exit gate
             steps++;
             System.out.println(direction + " robot row: " + robotRow + " robot col: " + robotCol + " meet exit");
+            System.out.println("Number of rows: " + map.length);
+            System.out.println("Number of columns: " + map[0].length());
             System.out.println("Steps to reach the Exit gate " + steps);
             return "win";
         } else if (map[currentRow].charAt(currentCol) == '.') {
@@ -224,7 +224,6 @@ class Robot {
 
         maze.go(backDirection);
         updateLocation(backDirection);
-        System.out.println(steps.isEmpty());
 //        System.out.println(currentDirection + ":" + currentRow + " " + currentCol);
     }
 
