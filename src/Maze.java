@@ -1,4 +1,5 @@
 import utility.ArrayStack;
+import utility.FileScanner;
 
 public class Maze {
     int rows;
@@ -66,6 +67,7 @@ public class Maze {
         steps = 0;
          */
 
+        /*
         rows = 7;
         cols = 7;
         map = new String[rows];
@@ -78,6 +80,18 @@ public class Maze {
         map[6] = ".......";
         robotRow = 4;
         robotCol = 2;
+        steps = 0;
+         */
+
+        try {
+            map = FileScanner.getMazeFromFile("src/data/maze2.txt");
+            System.out.println(map.length);
+            System.out.println(map[0].length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        robotRow = 1;
+        robotCol = 1;
         steps = 0;
     }
 
@@ -138,7 +152,7 @@ class Robot {
     private int currentRow = MAX_ROW;
     private int currentCol = MAX_COL;
     private String currentDirection = "UP";
-    ArrayStack<String> steps = new ArrayStack<>();
+    ArrayStack<String> steps = new ArrayStack<>(4 * MAX_ROW * MAX_COL);
 
     private boolean isVisited(String direction) {
         int checkedRow = currentRow, checkedCol = currentCol;
@@ -210,6 +224,7 @@ class Robot {
 
         maze.go(backDirection);
         updateLocation(backDirection);
+        System.out.println(steps.isEmpty());
 //        System.out.println(currentDirection + ":" + currentRow + " " + currentCol);
     }
 
