@@ -140,7 +140,11 @@ public class Maze {
     }
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         (new Robot()).navigate();
+        long endTime   = System.nanoTime();
+        long totalTime = endTime - startTime;
+        System.out.println("Total time: " + totalTime / 1000000 + "ms");
     }
 }
 
