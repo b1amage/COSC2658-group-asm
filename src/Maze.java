@@ -84,7 +84,7 @@ public class Maze {
          */
 
         try {
-            map = FileScanner.getMazeFromFile("src/data/maze12.txt");
+            map = FileScanner.getMazeFromFile("src/data/maze16.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
