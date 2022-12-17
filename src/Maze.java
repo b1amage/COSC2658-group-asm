@@ -118,15 +118,18 @@ public class Maze {
         if (map[currentRow].charAt(currentCol) == 'X') {
             // Exit gate
             steps++;
+            System.out.println(direction); // print the direction taken
             System.out.println("Steps to reach the Exit gate " + steps);
             return "win";
         } else if (map[currentRow].charAt(currentCol) == '.') {
             // Wall
             steps++;
+            System.out.println(direction); // print the direction taken
             return "false";
         } else {
             // Space => update robot location
             steps++;
+            System.out.println(direction); // print the direction taken
             robotRow = currentRow;
             robotCol = currentCol;
 
