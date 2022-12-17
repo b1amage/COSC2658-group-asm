@@ -118,15 +118,11 @@ public class Maze {
         if (map[currentRow].charAt(currentCol) == 'X') {
             // Exit gate
             steps++;
-            System.out.println(direction + " robot row: " + robotRow + " robot col: " + robotCol + " meet exit");
-            System.out.println("Number of rows: " + map.length);
-            System.out.println("Number of columns: " + map[0].length());
             System.out.println("Steps to reach the Exit gate " + steps);
             return "win";
         } else if (map[currentRow].charAt(currentCol) == '.') {
             // Wall
             steps++;
-            System.out.println(direction + " robot row: " + robotRow + " robot col: " + robotCol + " meet wall");
             return "false";
         } else {
             // Space => update robot location
@@ -134,17 +130,12 @@ public class Maze {
             robotRow = currentRow;
             robotCol = currentCol;
 
-            System.out.println(direction + " robot row: " + robotRow + " robot col: " + robotCol);
             return "true";
         }
     }
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
         (new Robot()).navigate();
-        long endTime   = System.nanoTime();
-        long totalTime = endTime - startTime;
-        System.out.println("Total time: " + totalTime / 1000000 + "ms");
     }
 }
 
@@ -184,7 +175,6 @@ class Robot {
     private String checkNextStep(Maze maze) {
         String result;
         if (!isVisited(currentDirection)) {
-//            System.out.println(currentDirection + ":" + currentRow + " " + currentCol);
             result = maze.go(currentDirection);
             if (result.equals("win")) {
                 return result;
@@ -199,7 +189,6 @@ class Robot {
         for (String direction : directions) {
             if (!direction.equals(currentDirection)) {
                 if (isVisited(direction)) continue;
-//                System.out.println(direction + ":" + currentRow + " " + currentCol);
                 result = maze.go(direction);
                 if (result.equals("true")) {
                     currentDirection = direction;
@@ -228,7 +217,6 @@ class Robot {
 
         maze.go(backDirection);
         updateLocation(backDirection);
-//        System.out.println(currentDirection + ":" + currentRow + " " + currentCol);
     }
 
     public void navigate() {
